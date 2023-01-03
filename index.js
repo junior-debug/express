@@ -1,3 +1,4 @@
+const e = require("express");
 const express = require("express");
 const app = express();
 
@@ -31,6 +32,41 @@ app.delete("/product", (req, res) => {
 
 app.patch("/product", (req, res) => {
   res.send("updating one products part");
+});
+
+app.get("/file", (req, res) => {
+  res.sendFile("./javascript.png", { root: __dirname });
+});
+
+app.get("/json", (req, res) => {
+  res.json([{ name: "junior", lastName: "martinez", items: [1, 2, 3] }]);
+});
+
+app.get("/isAlive", (req, res) => {
+  res.sendStatus(204);
+});
+
+app.use(express.json());
+app.post("/user", (req, res) => {
+  console.log(req.body);
+  res.send("usuario creado");
+});
+
+app.get("/name/:userName", (req, res) => {
+  res.send(`hola ${req.params.userName}`);
+});
+
+app.get("/add/:x/:y", (req, res) => {
+  const { x, y } = req.params;
+  res.send(`resultado ${parseInt(x) + parseInt(y)}`);
+});
+
+app.get("/picture/:nameUser/data", (req, res) => {
+  if (req.params.nameUser == "junior") {
+    res.sendFile("./javascript.png", { root: __dirname });
+  } else {
+    res.send(`incorrect name ${req.params.nameUser}`);
+  }
 });
 
 app.use((req, res) => {
