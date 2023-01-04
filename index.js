@@ -1,6 +1,10 @@
-const e = require("express");
 const express = require("express");
 const app = express();
+
+app.use((req, res, next) => {
+  console.log(`la url es ${req.url} y el metodo es ${req.method}`);
+  next();
+});
 
 app.get("/", (req, res) => {
   res.sendFile("./static/index.html", { root: __dirname });
@@ -67,6 +71,20 @@ app.get("/picture/:nameUser/data", (req, res) => {
   } else {
     res.send(`incorrect name ${req.params.nameUser}`);
   }
+});
+
+app.get("/character", (req, res) => {
+  if (req.query.character == "junior") {
+    res.send("personaje junior");
+  } else {
+    res.send("personaje no encontrado");
+  }
+});
+
+app.use(express.json());
+app.all("/infoServer", (req, res) => {
+  console.log(req.body);
+  res.send("server infomation");
 });
 
 app.use((req, res) => {
