@@ -1,9 +1,23 @@
 const express = require("express");
 const app = express();
+const morgan = require("morgan");
+app.use(morgan("dev"));
 
-app.use((req, res, next) => {
-  console.log(`la url es ${req.url} y el metodo es ${req.method}`);
-  next();
+// app.use((req, res, next) => {
+//   console.log(`la url es ${req.url} y el metodo es ${req.method}`);
+//   next();
+// });
+
+// app.use((req, res, next) => {
+//   if (req.query.name == "junior") {
+//     next();
+//   } else {
+//     res.send("NO AUTORIZADO");
+//   }
+// });
+
+app.get("/dashboard", (req, res) => {
+  res.send("welcome to dashboard");
 });
 
 app.get("/", (req, res) => {
