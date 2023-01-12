@@ -3,6 +3,14 @@ const app = express();
 const morgan = require("morgan");
 app.use(morgan("dev"));
 
+//setting//
+app.set("case sensitive routing", true);
+
+app.get("/UserName", (req, res) => {
+  res.send("user name");
+});
+//setting//
+
 // app.use((req, res, next) => {
 //   console.log(`la url es ${req.url} y el metodo es ${req.method}`);
 //   next();
@@ -20,9 +28,9 @@ app.get("/dashboard", (req, res) => {
   res.send("welcome to dashboard");
 });
 
-app.get("/", (req, res) => {
-  res.sendFile("./static/index.html", { root: __dirname });
-});
+// app.get("/", (req, res) => {
+//   res.sendFile("./static/index.html", { root: __dirname });
+// });
 
 app.get("/about", (req, res) => {
   res.send("this is the about");
@@ -101,6 +109,11 @@ app.all("/infoServer", (req, res) => {
   res.send("server infomation");
 });
 
+//static files//
+
+app.use("/static", express.static("./static"));
+
+//static files//
 app.use((req, res) => {
   res.status(404).send("no se encontro tu pagina");
 });

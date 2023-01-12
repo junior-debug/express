@@ -1,0 +1,11 @@
+{
+  "folders": [
+	{
+		"path": "."
+	},
+	{
+		"path": "../../../../xampp/htdocs/xampp/express-restApi-CRUD"
+	}
+],
+  "settings": {}
+}
