@@ -1,15 +1,15 @@
 const express = require("express");
 const app = express();
 const morgan = require("morgan");
+const path = require("path");
+require("ejs");
+const userRoutes = require("./static/routes/users");
+const homeRoutes = require("./static/routes/home");
+
+//middlewares//
 app.use(morgan("dev"));
-
-//setting//
-app.set("case sensitive routing", true);
-
-app.get("/UserName", (req, res) => {
-  res.send("user name");
-});
-//setting//
+app.use(userRoutes);
+app.use(homeRoutes);
 
 // app.use((req, res, next) => {
 //   console.log(`la url es ${req.url} y el metodo es ${req.method}`);
@@ -24,21 +24,19 @@ app.get("/UserName", (req, res) => {
 //   }
 // });
 
-app.get("/dashboard", (req, res) => {
-  res.send("welcome to dashboard");
-});
+//middlewares//
+
+//setting//
+app.set("case sensitive routing", true);
+app.set("appName", "Express Course");
+app.set("views", "./static/views");
+app.set("view engine", "ejs");
+
+//setting//
 
 // app.get("/", (req, res) => {
 //   res.sendFile("./static/index.html", { root: __dirname });
 // });
-
-app.get("/about", (req, res) => {
-  res.send("this is the about");
-});
-
-app.get("/weather", (req, res) => {
-  res.send("is nice the weather");
-});
 
 app.get("/product", (req, res) => {
   res.send("the products");
@@ -58,18 +56,6 @@ app.delete("/product", (req, res) => {
 
 app.patch("/product", (req, res) => {
   res.send("updating one products part");
-});
-
-app.get("/file", (req, res) => {
-  res.sendFile("./javascript.png", { root: __dirname });
-});
-
-app.get("/json", (req, res) => {
-  res.json([{ name: "junior", lastName: "martinez", items: [1, 2, 3] }]);
-});
-
-app.get("/isAlive", (req, res) => {
-  res.sendStatus(204);
 });
 
 app.use(express.json());
