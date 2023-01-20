@@ -3,7 +3,8 @@ const router = express.Router();
 
 router.all("/about", (req, res) => {
   const title = "Min pagina con ejs";
-  res.render("index", { title });
+  const isActive = false;
+  res.render("index", { title, isActive });
 });
 
 router.get("/weather", (req, res) => {
