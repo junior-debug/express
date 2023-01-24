@@ -1,5 +1,6 @@
 const express = require("express");
 const path = require("path");
+const axios = require("axios");
 const router = express.Router();
 
 router.get("/file", (req, res) => {
@@ -12,6 +13,13 @@ router.get("/json", (req, res) => {
 
 router.get("/dashboard", (req, res) => {
   res.render("dashboard");
+});
+
+router.get("/posts", async (req, res) => {
+  const response = await axios.get(
+    "https://jsonplaceholder.typicode.com/posts"
+  );
+  res.render("posts", { posts: response.data });
 });
 
 router.get("/isAlive", (req, res) => {

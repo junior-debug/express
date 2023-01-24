@@ -2,6 +2,7 @@ const express = require("express");
 const app = express();
 const morgan = require("morgan");
 const path = require("path");
+const connectDB = require("./db");
 require("ejs");
 const userRoutes = require("./static/routes/users");
 const homeRoutes = require("./static/routes/home");
